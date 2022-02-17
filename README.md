@@ -6,12 +6,12 @@ require './JBSNewMedia/DockerBuilder/Builder.php';
  /* 
   * Port
   * $port=1
-  * app|lib:8901 - database: 8801 - adminer:8701
-  * app-test|lib-test:8902 - database: 8802 - adminer:8702
+  * project:8901 - database: 8701 - adminer:8801
+  * project-test:8902 - database: 8702 - adminer:8802
   *
   * $port=3
-  * app|lib:8903 - database: 8803 - adminer:8703
-  * app-test|lib-test:8904 - database: 8804 - adminer:8704
+  * project:8903 - database: 8703 - adminer:8803
+  * project-test:8904 - database: 8704 - adminer:8804
   * 
   * Debian
   * bullseye or buster
@@ -20,7 +20,7 @@ require './JBSNewMedia/DockerBuilder/Builder.php';
   * 8.0 or 8.1
   *
   * Type
-  * app or lib
+  * app, lib, service or framework
   */
 
 $Builder=new \JBSNewMedia\DockerBuilder\Builder('company', 'project');

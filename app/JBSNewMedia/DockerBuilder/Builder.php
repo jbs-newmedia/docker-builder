@@ -2,7 +2,7 @@
 
 /*
  * PHPStorm-Project-Builder with Docker + PHPUnit + Cypress | osWFrame
- * Juergen Schwind
+ * Juergen Schwind <juergen.schwind@jbs-newmedia.de>
  *
  * Select:
  * Debian: Buster with Apache/Bullseye | with Apache
@@ -10,7 +10,7 @@
  * MariaDB: latest
  *
  * @Version 1.0.0
- * @Date 2022/02/15
+ * @Date 2022/02/17
  */
 
 namespace JBSNewMedia\DockerBuilder;
@@ -130,6 +130,9 @@ class Builder {
 	 * @param int $project_port
 	 */
 	public function setProjectPort(int $project_port):void {
+		if (($project_port<0)||($project_port>99)) {
+			$project_port=1;
+		}
 		$this->project_port=$project_port;
 	}
 
@@ -144,7 +147,7 @@ class Builder {
 	 * @param string $project_type
 	 */
 	public function setProjectType(string $project_type):void {
-		if (!in_array($project_type, ['app', 'lib', 'service'])) {
+		if (!in_array($project_type, ['app', 'lib', 'service', 'framework'])) {
 			$project_type='app';
 		}
 		$this->project_type=$project_type;
@@ -443,34 +446,34 @@ class Builder {
 			$base_file[]='    container_name: '.$this->getProjectName().'-'.$this->getProjectType().$addon;
 			$base_file[]='    build: .';
 			$base_file[]='    ports:';
-			$base_file[]='      - "890'.$i.':80"';
+			$base_file[]='      - "89'.sprintf('%02d', $i).':80"';
 			$base_file[]='    volumes:';
 			$base_file[]='      - type: bind';
 			$base_file[]='        source: ./../..';
 			$base_file[]='        target: /var/www/html';
 			$base_file[]='    tty: true';
 			#if ($i==$this->getProjectPort()) {
-				$base_file[]='  database:';
-				$base_file[]='    container_name: '.$this->getProjectName().'-database'.$addon;
-				$base_file[]='    image: mariadb';
-				$base_file[]='    ports:';
-				$base_file[]='      - "870'.$i.':3306"';
-				$base_file[]='    environment:';
-				$base_file[]='      MYSQL_ROOT_PASSWORD: mypassword';
-				$base_file[]='      MYSQL_DATABASE: mydatabase';
-				$base_file[]='      MYSQL_USER: myuser';
-				$base_file[]='      MYSQL_PASSWORD: mypassword';
-				$base_file[]='      MYSQL_INITDB_SKIP_TZINFO: 1';
-				$base_file[]='    volumes:';
-				$base_file[]='      - type: bind';
-				$base_file[]='        source: ./../../backup/'.$this->getProjectName().$addon;
-				$base_file[]='        target: /backup';
-				$base_file[]='    command: --sql_mode=ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
-				$base_file[]='  adminer:';
-				$base_file[]='    container_name: '.$this->getProjectName().'-adminer'.$addon;
-				$base_file[]='    image: adminer';
-				$base_file[]='    ports:';
-				$base_file[]='      - 880'.$i.':8080';
+			$base_file[]='  database:';
+			$base_file[]='    container_name: '.$this->getProjectName().'-database'.$addon;
+			$base_file[]='    image: mariadb';
+			$base_file[]='    ports:';
+			$base_file[]='      - "87'.sprintf('%02d', $i).':3306"';
+			$base_file[]='    environment:';
+			$base_file[]='      MYSQL_ROOT_PASSWORD: mypassword';
+			$base_file[]='      MYSQL_DATABASE: mydatabase';
+			$base_file[]='      MYSQL_USER: myuser';
+			$base_file[]='      MYSQL_PASSWORD: mypassword';
+			$base_file[]='      MYSQL_INITDB_SKIP_TZINFO: 1';
+			$base_file[]='    volumes:';
+			$base_file[]='      - type: bind';
+			$base_file[]='        source: ./../../backup/'.$this->getProjectName().$addon;
+			$base_file[]='        target: /backup';
+			$base_file[]='    command: --sql_mode=ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+			$base_file[]='  adminer:';
+			$base_file[]='    container_name: '.$this->getProjectName().'-adminer'.$addon;
+			$base_file[]='    image: adminer';
+			$base_file[]='    ports:';
+			$base_file[]='      - 88'.sprintf('%02d', $i).':8080';
 			#}
 			$this->za->addFromString('docker/'.$this->getProjectName().$addon.'/docker-compose.yml', implode("\n", $base_file));
 
@@ -510,15 +513,15 @@ class Builder {
 			$base_file[]='';
 
 			#if ($i==($this->getProjectPort()+1)) {
-				#$base_file[]='#mariadb';
-				#$base_file[]='RUN apt -y install mariadb-server';
-				#$base_file[]='RUN service mariadb start \\';
-				#$base_file[]='&& mariadb -u root -e "CREATE DATABASE mydatabase" \\';
-				#$base_file[]='&& mariadb -u root -e "CREATE USER \'myuser\'@localhost IDENTIFIED BY \'mypassword\'" \\';
-				#$base_file[]='&& mariadb -u root -e "GRANT ALL PRIVILEGES ON mydatabase.* TO \'myuser\'@localhost" \\';
-				#$base_file[]='&& mariadb -u root -e "ALTER USER \'root\'@localhost IDENTIFIED BY \'mypassword\'" \\';
-				#$base_file[]='&& mariadb -u root -pmypassword -e "FLUSH PRIVILEGES"';
-				#$base_file[]='';
+			#$base_file[]='#mariadb';
+			#$base_file[]='RUN apt -y install mariadb-server';
+			#$base_file[]='RUN service mariadb start \\';
+			#$base_file[]='&& mariadb -u root -e "CREATE DATABASE mydatabase" \\';
+			#$base_file[]='&& mariadb -u root -e "CREATE USER \'myuser\'@localhost IDENTIFIED BY \'mypassword\'" \\';
+			#$base_file[]='&& mariadb -u root -e "GRANT ALL PRIVILEGES ON mydatabase.* TO \'myuser\'@localhost" \\';
+			#$base_file[]='&& mariadb -u root -e "ALTER USER \'root\'@localhost IDENTIFIED BY \'mypassword\'" \\';
+			#$base_file[]='&& mariadb -u root -pmypassword -e "FLUSH PRIVILEGES"';
+			#$base_file[]='';
 			#}
 
 			$base_file[]='#environment';
