@@ -9,7 +9,7 @@
  * PHP: 8.0/8.1 | with xDebug:
  * MariaDB: latest
  *
- * @Version 1.0.0
+ * @Version 1.0.1
  * @Date 2022/02/17
  */
 
@@ -709,7 +709,7 @@ class Builder {
 			$base_file[]='SET /P AREYOUSURE=Export files. Are you sure (y/[n])?';
 			$base_file[]='IF /I "%AREYOUSURE%" NEQ "y" GOTO END';
 			$base_file[]='';
-			$base_file[]='docker-compose -f ../../docker/'.$this->getProjectName().$addon.'/docker-compose.yml -p "'.$this->getProjectName().$addon.'" exec '.$this->getProjectType().' bash -c "cd /var/www/; tar -czf /backup/files.tar.gz html"';
+			$base_file[]='docker-compose -f ../../docker/'.$this->getProjectName().$addon.'/docker-compose.yml -p "'.$this->getProjectName().$addon.'" exec '.$this->getProjectType().' bash -c "cd /var/www/html/; tar --exclude=\'./vendor\' -czf /backup/files.tar.gz '.$this->getProjectType().'"';
 			$base_file[]='';
 			$base_file[]=':END';
 			$base_file[]='endlocal';
