@@ -5,13 +5,36 @@ require './JBSNewMedia/DockerBuilder/Builder.php';
 
 $Builder=new \JBSNewMedia\DockerBuilder\Builder('company', 'project');
 $Builder->setProjectPort(1);
-$Builder->setProjectDebian('bullseye');
+$Builder->setProjectDebian('bullseye'); /* bullseye|buster */
 $Builder->setProjectAuthor('mr example');
 $Builder->setProjectEmail('send@example.com');
-$Builder->setProjectPhp('8.1');
-$Builder->setProjectType('app');
+$Builder->setProjectPhp('8.1');  /* 8.0|8.1 */
+$Builder->setProjectType('app');  /* app|lib */
 $Builder->createZIP();
 ```
 
+# PHPStorm settings
 
-![Test](data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjQxNy4wMzFweCIgaGVpZ2h0PSI0MTcuMDMxcHgiIHZpZXdCb3g9IjAgMCA0MTcuMDMxIDQxNy4wMzEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQxNy4wMzEgNDE3LjAzMTsiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPHBhdGggZD0iTTIxOS42ODMsOTIuMTQ2Yy0wLjI3OS0wLjMxNS0wLjUyLTAuNjI3LTAuODQ5LTAuOTI1Yy0zLjY0NC0zLjI3Mi0zLjc0Mi0yLjMwNiwwLjI0Ny01Ljk4Mw0KCQljMi45NTUtMi43MTIsNi41NDEtNC44MzQsOS43OS03LjE4YzguNTk2LTYuMjEzLDE0LjI1NC0xNC41MzQsMTguMDc5LTI0LjM5OWM4LjU4Mi0yMi4xNS0xNi43MDYtMzcuNDUzLTI5LjM5Ni01MC41NjINCgkJYy05LjE2OC05LjQ4NS0yMy42MDMsNC45ODItMTQuNDQ0LDE0LjQ0N2M3LjA3Niw3LjMyNSwxNi4xOSwxMy4yNjQsMjIuMzQ5LDIxLjQwN2M2Ljg5Nyw5LjExNi0zLjYxMywxOS4xNzQtMTAuODE0LDI0LjI0OQ0KCQljLTExLjEzMyw3Ljg0NC0yMC43NTcsMTguMjYyLTE4LjUzMywyOS40MzRjLTQ5Ljk2NCw0LjY2OC05Ni4xNiwzMi4wNTItOTYuMTYsODAuMzI3djEzNS41MQ0KCQljMCw1OS44NjIsNDguNjk4LDEwOC41NjIsMTA4LjU2NCwxMDguNTYyYzU5Ljg2MywwLDEwOC41NjYtNDguNywxMDguNTY2LTEwOC41NjJWMTcyLjk1DQoJCUMzMTcuMDg1LDEyMC4yNDcsMjY4LjA1LDk0LjcyMywyMTkuNjgzLDkyLjE0NnogTTEyMC4zOTEsMTcyLjk1YzAtMzUuODMzLDM4Ljg5OC01Ni41ODEsNzkuMTg2LTYwLjAyN3YxMjQuOTgyDQoJCWMtMzYuNzUxLTEuODUtNjYuNTg5LTEwLjIyMi03OS4xODYtMTQuMzA5VjE3Mi45NXogTTI5Ni42NDgsMzA4LjQ2MWMwLDQ4LjYwNC0zOS41MzcsODguMTMzLTg4LjEyOSw4OC4xMzMNCgkJYy00OC41OSwwLTg4LjEyOC0zOS41MjktODguMTI4LTg4LjEzM1YyNDUuMDhjMTguMjQ5LDUuNTE2LDUyLjYsMTMuODgyLDkzLjIwMiwxMy44ODJjMjYuMDAzLDAsNTQuNTU2LTMuNDc5LDgzLjA1Ni0xMy4yODYNCgkJVjMwOC40NjF6IE0yOTYuNjQ4LDIyMy45NGMtMjUuODQ0LDkuODgzLTUyLjIzNywxMy43NDYtNzYuNjM1LDE0LjI3MXYtMTI1LjU5YzM5LjQwNywyLjM2Myw3Ni42MzUsMjEuMjY0LDc2LjYzNSw2MC4zMzdWMjIzLjk0eg0KCQkgTTI4OS43MzUsMjE2LjIwM2MwLDAtNDYuNjg4LDEzLjA3My02Mi41NjcsMTAuMjcxVjEyMi44MTNDMjY5LjQyOSwxMzAuNzUzLDI5Ni42MjUsMTQzLjUzMywyODkuNzM1LDIxNi4yMDN6Ii8+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg==)
+### Docker
+- navigate to /docker/**{project-name}**/ > docker-compose.yml > *mouse right click* > Run
+- navigate to /docker/**{project-name}**-test/ > docker-compose.yml > *mouse right click* > Run
+
+### PHP Interpreter
+- File > Settings > PHP > CLI Interpreter > + > From Docker > Docker Compose
+- Configuration files > /docker/**{project}-name**-test/docker-compose.yml
+- Service: app
+- Lifecycle: Connect to existing container
+
+### Composer
+- File > Settings > PHP > Composer > Path to composer.json -> /var/www/html/composer.json
+- navigate to / > composer.json > *mouse right click* > Init Composer
+- Remote Interpreter
+- Select PHP Interpreter
+- navigate to / > composer.json > *mouse right click* > Install
+
+### PHPUnit
+- File > Settings > PHP > Debug > Test Frameworks > Delete Local
+- File > Settings > PHP > Debug > Test Frameworks > + > PHPUnit by Remote Interpreter
+- Select PHP Interpreter
+
+
