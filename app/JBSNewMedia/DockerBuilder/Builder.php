@@ -9,8 +9,9 @@
  * PHP: 8.0/8.1 | with xDebug:
  * MariaDB: latest
  *
- * @Version 1.0.1
- * @Date 2022/02/17
+ * @version 1.0.2
+ * @date 2022/03/14
+ * @license MIT License
  */
 
 namespace JBSNewMedia\DockerBuilder;
@@ -495,7 +496,6 @@ class Builder {
 			$base_file[]='RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf';
 			$base_file[]='ENV APACHE_DOCUMENT_ROOT=/var/www/html/'.$this->getProjectType();
 			$base_file[]='RUN sed -ri -e \'s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g\' /etc/apache2/sites-available/*.conf';
-			$base_file[]='RUN cd /var/www/html/'.$this->getProjectType().'/; ln -s /var/www/html/vendor/ vendor';
 			$base_file[]='';
 			$base_file[]='#php'.$this->getProjectPhp();
 			$base_file[]='RUN apt -y install wget lsb-release apt-transport-https ca-certificates';
@@ -526,6 +526,7 @@ class Builder {
 
 			$base_file[]='#environment';
 			$base_file[]='RUN cd /; ln -s /var/www/html/backup/'.$this->getProjectName().$addon.'/ backup';
+			$base_file[]='RUN cd /var/www/html/'.$this->getProjectType().'/; ln -s /var/www/html/vendor/ vendor';
 			$base_file[]='RUN apt -y install locales';
 			$base_file[]='RUN sed -i \'/en_US.UTF-8/s/^# //g\' /etc/locale.gen';
 			$base_file[]='RUN sed -i \'/de_DE.UTF-8/s/^# //g\' /etc/locale.gen';
@@ -727,6 +728,10 @@ class Builder {
 			$base_file[]=':END';
 			$base_file[]='endlocal';
 			$this->za->addFromString('win/'.$this->getProjectName().$addon.'/oswdocker-ssh-'.$this->getProjectType().'-import.bat', implode("\n", $base_file));
+
+			$base_file=[];
+			$base_file[]='docker-compose -f ../../docker/'.$this->getProjectName().$addon.'/docker-compose.yml -p "'.$this->getProjectName().$addon.'" exec '.$this->getProjectType().' bash -c "cd /var/www/html/'.$this->getProjectType().'/; ln -s /var/www/html/vendor/ vendor"';
+			$this->za->addFromString('win/'.$this->getProjectName().$addon.'/oswdocker-ssh-'.$this->getProjectType().'-vendor.bat', implode("\n", $base_file));
 
 			$base_file=[];
 			$base_file[]='docker-compose -f ../../docker/'.$this->getProjectName().$addon.'/docker-compose.yml -p "'.$this->getProjectName().$addon.'" up -d';
