@@ -575,7 +575,7 @@ class Builder {
 			$this->za->addFromString('win/'.$this->getProjectName().$addon.'/oswdocker-ssh-'.$this->getProjectType().'-import.bat', implode("\n", $base_file));
 
 			$base_file=[];
-			$base_file[]='docker-compose -f ../../docker/web/docker-compose.yml -p "web" exec app bash -c "cd /var/www/html/app/; ln -s /var/www/html/vendor/ vendor; chown -R www-data:www-data /var/www/html; find /var/www/html -type d -exec chmod 775 {} +; find /var/www/html -type f -not -executable -exec chmod 664 {} +; find /var/www/html -type f -executable -exec chmod 775 {} +;"';
+			$base_file[]='docker-compose -f ../../docker/'.$this->getProjectName().$addon.'/docker-compose.yml -p "'.$this->getProjectName().$addon.'" exec '.$this->getProjectType().' bash -c "cd /var/www/html/'.$this->getProjectType().'/; ln -s /var/www/html/vendor/ vendor; chown -R www-data:www-data /var/www/html; find /var/www/html -type d -exec chmod 775 {} +; find /var/www/html -type f -not -executable -exec chmod 664 {} +; find /var/www/html -type f -executable -exec chmod 775 {} +;"';
 			$this->za->addFromString('win/'.$this->getProjectName().$addon.'/oswdocker-ssh-'.$this->getProjectType().'-env.bat', implode("\n", $base_file));
 
 			$base_file=[];
