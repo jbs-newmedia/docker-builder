@@ -260,142 +260,9 @@ class Builder {
 		$base_iml=[];
 		$base_iml[]='<?xml version="1.0" encoding="UTF-8"?>';
 		$base_iml[]='<project version="4">';
-		#$base_iml[]='  <component name="PhpInterpreters">';
-		#$base_iml[]='    <interpreters>';
-		#$base_iml[]='      <interpreter id="e8b24920-f88f-4538-8d6f-ce185fdaa3db" name="'.$this->getProjectName().'-test_web:latest" home="docker://DATA" debugger_id="php.debugger.XDebug">';
-		#$base_iml[]='        <remote_data INTERPRETER_PATH="php" HELPERS_PATH="/opt/.phpstorm_helpers" INITIALIZED="false" VALID="true" RUN_AS_ROOT_VIA_SUDO="false" DOCKER_ACCOUNT_NAME="Docker" DOCKER_IMAGE_NAME="'.$this->getProjectName().'-test_web:latest" DOCKER_REMOTE_PROJECT_PATH="/opt/project" />';
-		#$base_iml[]='      </interpreter>';
-		#$base_iml[]='    </interpreters>';
-		#$base_iml[]='  </component>';
-		#$base_iml[]='  <component name="PhpInterpretersPhpInfoCache">';
-		#$base_iml[]='    <phpInfoCache>';
-		#$base_iml[]='      <interpreter name="'.$this->getProjectName().'-test_web:latest">';
-		#$base_iml[]='        <phpinfo binary_type="PHP" php_cli="/usr/bin/php'.$this->getProjectPhp().'" path_separator=":" version="'.$this->getProjectPhp().'">';
-		#$base_iml[]='          <additional_php_ini>/etc/php/'.$this->getProjectPhp().'/cli/conf.d/10-mysqlnd.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/10-opcache.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/10-pdo.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/15-xml.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-bcmath.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-calendar.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-ctype.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-curl.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-dom.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-exif.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-ffi.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-fileinfo.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-ftp.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-gd.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-gettext.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-iconv.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-intl.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-mbstring.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-mysqli.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-pdo_mysql.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-pdo_sqlite.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-phar.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-posix.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-readline.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-shmop.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-simplexml.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-sockets.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-sqlite3.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-sysvmsg.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-sysvsem.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-sysvshm.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-tokenizer.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-xdebug.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-xmlreader.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-xmlwriter.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-xsl.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/20-zip.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/30-oswdocker.ini, /etc/php/'.$this->getProjectPhp().'/cli/conf.d/40-oswdocker-custom.ini</additional_php_ini>';
-		#$base_iml[]='          <configuration_file>/etc/php/'.$this->getProjectPhp().'/cli/php.ini</configuration_file>';
-		#$base_iml[]='          <configuration_options>';
-		#$base_iml[]='            <configuration_option name="include_path" value=".:/usr/share/php" />';
-		#$base_iml[]='          </configuration_options>';
-		#$base_iml[]='          <debuggers>';
-		#$base_iml[]='            <debugger_info debugger="xdebug" debugger_version="3.1.2">';
-		#$base_iml[]='              <debug_extensions />';
-		#$base_iml[]='            </debugger_info>';
-		#$base_iml[]='          </debuggers>';
-		#$base_iml[]='          <loaded_extensions>';
-		#$base_iml[]='            <extension name="Core" />';
-		#$base_iml[]='            <extension name="FFI" />';
-		#$base_iml[]='            <extension name="PDO" />';
-		#$base_iml[]='            <extension name="Phar" />';
-		#$base_iml[]='            <extension name="Reflection" />';
-		#$base_iml[]='            <extension name="SPL" />';
-		#$base_iml[]='            <extension name="SimpleXML" />';
-		#$base_iml[]='            <extension name="Zend OPcache" />';
-		#$base_iml[]='            <extension name="bcmath" />';
-		#$base_iml[]='            <extension name="calendar" />';
-		#$base_iml[]='            <extension name="ctype" />';
-		#$base_iml[]='            <extension name="curl" />';
-		#$base_iml[]='            <extension name="date" />';
-		#$base_iml[]='            <extension name="dom" />';
-		#$base_iml[]='            <extension name="exif" />';
-		#$base_iml[]='            <extension name="fileinfo" />';
-		#$base_iml[]='            <extension name="filter" />';
-		#$base_iml[]='            <extension name="ftp" />';
-		#$base_iml[]='            <extension name="gd" />';
-		#$base_iml[]='            <extension name="gettext" />';
-		#$base_iml[]='            <extension name="hash" />';
-		#$base_iml[]='            <extension name="iconv" />';
-		#$base_iml[]='            <extension name="intl" />';
-		#$base_iml[]='            <extension name="json" />';
-		#$base_iml[]='            <extension name="libxml" />';
-		#$base_iml[]='            <extension name="mbstring" />';
-		#$base_iml[]='            <extension name="mysqli" />';
-		#$base_iml[]='            <extension name="mysqlnd" />';
-		#$base_iml[]='            <extension name="openssl" />';
-		#$base_iml[]='            <extension name="pcntl" />';
-		#$base_iml[]='            <extension name="pcre" />';
-		#$base_iml[]='            <extension name="pdo_mysql" />';
-		#$base_iml[]='            <extension name="pdo_sqlite" />';
-		#$base_iml[]='            <extension name="posix" />';
-		#$base_iml[]='            <extension name="readline" />';
-		#$base_iml[]='            <extension name="session" />';
-		#$base_iml[]='            <extension name="shmop" />';
-		#$base_iml[]='            <extension name="sockets" />';
-		#$base_iml[]='            <extension name="sodium" />';
-		#$base_iml[]='            <extension name="sqlite3" />';
-		#$base_iml[]='            <extension name="standard" />';
-		#$base_iml[]='            <extension name="sysvmsg" />';
-		#$base_iml[]='            <extension name="sysvsem" />';
-		#$base_iml[]='            <extension name="sysvshm" />';
-		#$base_iml[]='            <extension name="tokenizer" />';
-		#$base_iml[]='            <extension name="xdebug" />';
-		#$base_iml[]='            <extension name="xml" />';
-		#$base_iml[]='            <extension name="xmlreader" />';
-		#$base_iml[]='            <extension name="xmlwriter" />';
-		#$base_iml[]='            <extension name="xsl" />';
-		#$base_iml[]='            <extension name="zip" />';
-		#$base_iml[]='            <extension name="zlib" />';
-		#$base_iml[]='          </loaded_extensions>';
-		#$base_iml[]='        </phpinfo>';
-		#$base_iml[]='      </interpreter>';
-		#$base_iml[]='    </phpInfoCache>';
-		#$base_iml[]='  </component>';
 		$base_iml[]='  <component name="PhpProjectSharedConfiguration" php_language_level="'.$this->getProjectPhp().'" />';
-		#$base_iml[]='  <component name="PhpUnit">';
-		#$base_iml[]='    <phpunit_settings>';
-		#$base_iml[]='      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/phpunit.xml.dist" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" use_configuration_file="true" />';
-		#$base_iml[]='      <phpunit_by_interpreter interpreter_id="e8b24920-f88f-4538-8d6f-ce185fdaa3db" configuration_file_path="/opt/project/phpunit.xml.dist" custom_loader_path="/opt/project/vendor/autoload.php" phpunit_phar_path="" use_configuration_file="true" />';
-		#$base_iml[]='    </phpunit_settings>';
-		#$base_iml[]='  </component>';
 		$base_iml[]='</project>';
 		$this->za->addFromString('.idea/php.xml', implode("\n", $base_iml));
-
-		/*
-		$base_iml=[];
-		$base_iml[]='<?xml version="1.0" encoding="UTF-8"?>';
-		$base_iml[]='<project version="4">';
-		$base_iml[]='  <component name="PhpDockerContainerSettings">';
-		$base_iml[]='    <list>';
-		$base_iml[]='      <map>';
-		$base_iml[]='        <entry key="e8b24920-f88f-4538-8d6f-ce185fdaa3db">';
-		$base_iml[]='          <value>';
-		$base_iml[]='            <DockerContainerSettings>';
-		$base_iml[]='              <option name="version" value="1" />';
-		$base_iml[]='              <option name="volumeBindings">';
-		$base_iml[]='                <list>';
-		$base_iml[]='                  <DockerVolumeBindingImpl>';
-		$base_iml[]='                    <option name="containerPath" value="/opt/project" />';
-		$base_iml[]='                    <option name="hostPath" value="$PROJECT_DIR$" />';
-		$base_iml[]='                  </DockerVolumeBindingImpl>';
-		$base_iml[]='                </list>';
-		$base_iml[]='              </option>';
-		$base_iml[]='            </DockerContainerSettings>';
-		$base_iml[]='          </value>';
-		$base_iml[]='        </entry>';
-		$base_iml[]='      </map>';
-		$base_iml[]='    </list>';
-		$base_iml[]='  </component>';
-		$base_iml[]='</project>';
-		$this->za->addFromString('.idea/php-docker-settings.xml', implode("\n", $base_iml));
-		*/
-
-		/*
-		$base_iml=[];
-		$base_iml[]='<?xml version="1.0" encoding="UTF-8"?>';
-		$base_iml[]='<project version="4">';
-		$base_iml[]='  <component name="PhpTestFrameworkVersionCache">';
-		$base_iml[]='    <tools_cache>';
-		$base_iml[]='      <tool tool_name="PHPUnit">';
-		$base_iml[]='        <cache>';
-		$base_iml[]='          <versions>';
-		$base_iml[]='            <info id="interpreter-e8b24920-f88f-4538-8d6f-ce185fdaa3db" version="9.5.13" />';
-		$base_iml[]='          </versions>';
-		$base_iml[]='        </cache>';
-		$base_iml[]='      </tool>';
-		$base_iml[]='    </tools_cache>';
-		$base_iml[]='  </component>';
-		$base_iml[]='</project>';
-		$this->za->addFromString('.idea/php-test-framework.xml', implode("\n", $base_iml));
-		*/
 
 		return true;
 	}
@@ -407,8 +274,6 @@ class Builder {
 		if ($this->getProjectType()=='app') {
 			$this->za->addFromString($this->getProjectType().'/index.php', file_get_contents('http://oswframe.com/installer'));
 		}
-
-		#https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php
 
 		$base_file=[];
 		$base_file[]='<?php';
@@ -453,7 +318,6 @@ class Builder {
 			$base_file[]='        source: ./../..';
 			$base_file[]='        target: /var/www/html';
 			$base_file[]='    tty: true';
-			#if ($i==$this->getProjectPort()) {
 			$base_file[]='  database:';
 			$base_file[]='    container_name: '.$this->getProjectName().'-database'.$addon;
 			$base_file[]='    image: mariadb';
@@ -475,7 +339,6 @@ class Builder {
 			$base_file[]='    image: adminer';
 			$base_file[]='    ports:';
 			$base_file[]='      - 88'.sprintf('%02d', $i).':8080';
-			#}
 			$this->za->addFromString('docker/'.$this->getProjectName().$addon.'/docker-compose.yml', implode("\n", $base_file));
 
 			$base_file=[];
@@ -512,30 +375,14 @@ class Builder {
 			$base_file[]='RUN cd /etc/php/'.$this->getProjectPhp().'/cli/conf.d/; ln -s /var/www/html/php-conf/'.$this->getProjectName().$addon.'/40-oswdocker-custom.ini 40-oswdocker-custom.ini';
 			$base_file[]='';
 
-			#if ($i==($this->getProjectPort()+1)) {
-			#$base_file[]='#mariadb';
-			#$base_file[]='RUN apt -y install mariadb-server';
-			#$base_file[]='RUN service mariadb start \\';
-			#$base_file[]='&& mariadb -u root -e "CREATE DATABASE mydatabase" \\';
-			#$base_file[]='&& mariadb -u root -e "CREATE USER \'myuser\'@localhost IDENTIFIED BY \'mypassword\'" \\';
-			#$base_file[]='&& mariadb -u root -e "GRANT ALL PRIVILEGES ON mydatabase.* TO \'myuser\'@localhost" \\';
-			#$base_file[]='&& mariadb -u root -e "ALTER USER \'root\'@localhost IDENTIFIED BY \'mypassword\'" \\';
-			#$base_file[]='&& mariadb -u root -pmypassword -e "FLUSH PRIVILEGES"';
-			#$base_file[]='';
-			#}
-
 			$base_file[]='#environment';
 			$base_file[]='RUN cd /; ln -s /var/www/html/backup/'.$this->getProjectName().$addon.'/ backup';
-			$base_file[]='RUN cd /var/www/html/'.$this->getProjectType().'/; ln -s /var/www/html/vendor/ vendor';
 			$base_file[]='RUN apt -y install locales';
 			$base_file[]='RUN sed -i \'/en_US.UTF-8/s/^# //g\' /etc/locale.gen';
 			$base_file[]='RUN sed -i \'/de_DE.UTF-8/s/^# //g\' /etc/locale.gen';
 			$base_file[]='RUN locale-gen';
 			$base_file[]='RUN a2enmod rewrite';
 			$base_file[]='RUN sed -i \'/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/\' /etc/apache2/apache2.conf';
-			$base_file[]='RUN chown -R www-data:www-data /var/www ';
-			$base_file[]='RUN find /var/www -type d -exec chmod 775 {} +';
-			$base_file[]='RUN find /var/www -type f -exec chmod 664 {} +';
 			$base_file[]='EXPOSE 80';
 			$base_file[]='CMD ["/usr/sbin/apache2ctl","-DFOREGROUND"]';
 			$base_file[]='';
@@ -653,8 +500,6 @@ class Builder {
 			}
 			if ($i==($this->getProjectPort()+1)) {
 				$addon='-test';
-				#$services=[$this->getProjectType()];
-				#$db_service=$this->getProjectType();
 				$services=[$this->getProjectType(), 'database', 'adminer'];
 				$db_service='database';
 			}
@@ -730,8 +575,8 @@ class Builder {
 			$this->za->addFromString('win/'.$this->getProjectName().$addon.'/oswdocker-ssh-'.$this->getProjectType().'-import.bat', implode("\n", $base_file));
 
 			$base_file=[];
-			$base_file[]='docker-compose -f ../../docker/'.$this->getProjectName().$addon.'/docker-compose.yml -p "'.$this->getProjectName().$addon.'" exec '.$this->getProjectType().' bash -c "cd /var/www/html/'.$this->getProjectType().'/; ln -s /var/www/html/vendor/ vendor"';
-			$this->za->addFromString('win/'.$this->getProjectName().$addon.'/oswdocker-ssh-'.$this->getProjectType().'-vendor.bat', implode("\n", $base_file));
+			$base_file[]='docker-compose -f ../../docker/web/docker-compose.yml -p "web" exec app bash -c "cd /var/www/html/app/; ln -s /var/www/html/vendor/ vendor; chown -R www-data:www-data /var/www/html; find /var/www/html -type d -exec chmod 775 {} +; find /var/www/html -type f -not -executable -exec chmod 664 {} +; find /var/www/html -type f -executable -exec chmod 775 {} +;"';
+			$this->za->addFromString('win/'.$this->getProjectName().$addon.'/oswdocker-ssh-'.$this->getProjectType().'-env.bat', implode("\n", $base_file));
 
 			$base_file=[];
 			$base_file[]='docker-compose -f ../../docker/'.$this->getProjectName().$addon.'/docker-compose.yml -p "'.$this->getProjectName().$addon.'" up -d';
@@ -782,6 +627,8 @@ class Builder {
 			$base_file[]='/app/oswtools/.logs/';
 			$base_file[]='/app/oswtools/.sessions/';
 			$base_file[]='/app/oswtools/data/.tmp/';
+			$base_file[]='/app/vendor/';
+
 		}
 		$base_file[]='/backup/';
 		$base_file[]='/var/';

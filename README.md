@@ -33,7 +33,7 @@ $Builder->setProjectType('app');
 $Builder->createZIP();
 ```
 
-# PHPStorm settings
+# PHPStorm/Project settings
 
 ### Docker
 - navigate to /docker/**{project-name}**/ > docker-compose.yml > *mouse right click* > Run
@@ -51,6 +51,9 @@ $Builder->createZIP();
 - Remote Interpreter
 - Select PHP Interpreter
 - navigate to / > composer.json > *mouse right click* > Install
+
+### Environment
+- navigate to /win/**{project-name}**/ > oswdocker-ssh-**{project-type}**-env.bat > *mouse right click* > Run
 
 ### PHPUnit
 - File > Settings > PHP > Debug > Test Frameworks > Delete Local
