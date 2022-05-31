@@ -627,7 +627,7 @@ class Builder {
 			$base_file[]='/app/oswtools/.logs/';
 			$base_file[]='/app/oswtools/.sessions/';
 			$base_file[]='/app/oswtools/data/.tmp/';
-			$base_file[]='/app/vendor/';
+			$base_file[]='/app/vendor';
 
 		}
 		$base_file[]='/backup/';
