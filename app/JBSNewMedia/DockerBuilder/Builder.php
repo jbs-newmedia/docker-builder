@@ -1,16 +1,16 @@
 <?php
 
 /*
- * PHPStorm-Project-Builder with Docker + PHPUnit + Cypress | osWFrame
+ * PHPStorm-Project-Builder with Docker + PHPUnit + Cypress + MkDocs | osWFrame
  * Juergen Schwind <juergen.schwind@jbs-newmedia.de>
  *
  * Select:
- * Debian: Buster with Apache/Bullseye | with Apache
- * PHP: 8.0/8.1 | with xDebug:
+ * Debian: Bullseye/Buster | with Apache
+ * PHP: 8.0/8.1/8.2 | with xDebug
  * MariaDB: latest
  *
- * @version 1.0.2
- * @date 2022/03/15
+ * @version 1.0.3
+ * @date 2022/07/15
  * @license MIT License
  */
 
@@ -182,7 +182,7 @@ class Builder {
 	 * @param string $project_php
 	 */
 	public function setProjectPhp(string $project_php):void {
-		if (!in_array($project_php, ['8.0', '8.1'])) {
+		if (!in_array($project_php, ['8.0', '8.1', '8.2'])) {
 			$project_php='8.0';
 		}
 		$this->project_php=$project_php;
@@ -211,6 +211,7 @@ class Builder {
 		$this->addPHPConf();
 		$this->addPHPUnit();
 		$this->addCypress();
+		$this->addMkDocs();
 		$this->addWinShell();
 		$this->addProject();
 		$this->za->close();
@@ -351,9 +352,6 @@ class Builder {
 			$base_file[]='RUN apt update';
 			$base_file[]='RUN apt -y upgrade';
 			$base_file[]='';
-			$base_file[]='#composer';
-			$base_file[]='RUN apt -y install composer';
-			$base_file[]='';
 			$base_file[]='#apache2';
 			$base_file[]='RUN apt -y install apache2';
 			$base_file[]='RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf';
@@ -374,6 +372,28 @@ class Builder {
 			$base_file[]='RUN cd /etc/php/'.$this->getProjectPhp().'/cli/conf.d/; ln -s /var/www/html/php-conf/'.$this->getProjectName().$addon.'/30-oswdocker.ini 30-oswdocker.ini';
 			$base_file[]='RUN cd /etc/php/'.$this->getProjectPhp().'/cli/conf.d/; ln -s /var/www/html/php-conf/'.$this->getProjectName().$addon.'/40-oswdocker-custom.ini 40-oswdocker-custom.ini';
 			$base_file[]='';
+
+			$base_file[]='#composer';
+			if ($this->getProjectDebian()=='buster') {
+				$base_file[]='RUN cd /tmp/; php -r "copy(\'https://getcomposer.org/installer\', \'composer-setup.php\');"';
+				$base_file[]='RUN cd /tmp/; php composer-setup.php --install-dir=/usr/bin --filename=composer';
+				$base_file[]='RUN apt -y install php-xml php-curl';
+			} else {
+				$base_file[]='RUN apt -y install composer php-xml php-curl';
+			}
+			$base_file[]='';
+
+			if ($i==($this->getProjectPort()+1)) {
+				$base_file[]='#mkdocs';
+				if ($this->getProjectDebian()=='buster') {
+					$base_file[]='RUN apt -y install python-pip';
+				} else {
+					$base_file[]='RUN apt -y install pip';
+				}
+				$base_file[]='RUN pip install mkdocs';
+				$base_file[]='RUN pip install mkdocs[i18n]';
+				$base_file[]='';
+			}
 
 			$base_file[]='#environment';
 			$base_file[]='RUN cd /; ln -s /var/www/html/backup/'.$this->getProjectName().$addon.'/ backup';
@@ -491,6 +511,24 @@ class Builder {
 	/**
 	 * @return bool
 	 */
+	protected function addMkDocs():bool {
+		$base_file=[];
+		$base_file[]='site_name: '.$this->getProjectName();
+		$base_file[]='theme:';
+		$base_file[]='  name: readthedocs';
+		$base_file[]='  locale: de';
+		$base_file[]='docs_dir: /var/www/html/doc/md';
+		$base_file[]='site_dir: /var/www/html/doc/html';
+		$this->za->addFromString('doc/mkdocs.yml', implode("\n", $base_file));
+
+		$this->za->addFromString('doc/md/dummy.txt', 'Place for markdown docs');
+
+		return true;
+	}
+
+	/**
+	 * @return bool
+	 */
 	protected function addWinShell():bool {
 		for ($i=$this->getProjectPort(); $i<=$this->getProjectPort()+1; $i++) {
 			if ($i==$this->getProjectPort()) {
@@ -520,6 +558,12 @@ class Builder {
 				$base_file=[];
 				$base_file[]='docker-compose -f ../../docker/'.$this->getProjectName().$addon.'/docker-compose.yml -p "'.$this->getProjectName().$addon.'" exec '.$service.' /bin/bash';
 				$this->za->addFromString('win/'.$this->getProjectName().$addon.'/oswdocker-ssh-'.$service.'.bat', implode("\n", $base_file));
+			}
+
+			if ($i==($this->getProjectPort()+1)) {
+				$base_file=[];
+				$base_file[]='docker-compose -f ../../docker/'.$this->getProjectName().$addon.'/docker-compose.yml -p "'.$this->getProjectName().$addon.'" exec '.$this->getProjectType().' bash -c "cd /var/www/html/doc/; mkdocs build;"';
+				$this->za->addFromString('win/'.$this->getProjectName().$addon.'/oswdocker-ssh-mkdocs.bat', implode("\n", $base_file));
 			}
 
 			$base_file=[];
@@ -628,7 +672,6 @@ class Builder {
 			$base_file[]='/app/oswtools/.sessions/';
 			$base_file[]='/app/oswtools/data/.tmp/';
 			$base_file[]='/app/vendor';
-
 		}
 		$base_file[]='/backup/';
 		$base_file[]='/var/';
