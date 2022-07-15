@@ -1,4 +1,4 @@
-# PHP Example
+# PHP example
 
 ```
 require './JBSNewMedia/DockerBuilder/Builder.php';
@@ -32,6 +32,10 @@ $Builder->setProjectPhp('8.1');
 $Builder->setProjectType('app');
 $Builder->createZIP();
 ```
+
+# PHPStorm plugins
+
+[cypress-support](https://plugins.jetbrains.com/plugin/13819-cypress-support)
 
 # PHPStorm/Project settings
 
